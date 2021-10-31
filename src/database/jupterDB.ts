@@ -1,13 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 import { Client, Collection } from "discord.js";
 
-interface jupterDBEvents {
-  ready: (jupterDB: jupterDB) => unknown;
+interface reconDBEvents {
+  ready: (reconDB: reconDB) => unknown;
 }
 
-export class jupterDB {
-  public schema = mongoose.model<jupterDBSchema>(
-    "jupterdb-collection",
+export class reconDB {
+  public schema = mongoose.model<reconDBSchema>(
+    "recondb-collection",
     new Schema({
       key: String,
       value: mongoose.SchemaTypes.Mixed,
@@ -17,16 +17,16 @@ export class jupterDB {
   public client: Client;
 
   /**
-   * @name jupterDB
-   * @kind construtor
-   * @param {jupterDBOptions} options Opções para usar o banco de dados
+   * @name reconDB
+   * @kind constructor
+   * @param {reconDBOptions} options options to use the database
    */
 
   constructor(mongooseConnectionString: string) {
     if (mongoose.connection.readyState !== 1) {
       if (!mongooseConnectionString)
         throw new Error(
-          "Não há conexão estabelecida com mongoose, uma conexão com mongoose é necessária!"
+          "There is no established  connection with mongoose and a mongoose connection is required!"
         );
 
       mongoose.connect(mongooseConnectionString);
@@ -44,10 +44,10 @@ export class jupterDB {
 
   /**
    * @method
-   * @param key  A chave, para que você possa obtê-lo <MongoClient>.get("key")
-   * @param value valor o valor que será salvo na chave
-   * @description Salva dados para MongoDB
-   * @example <jupterDB>.set("test","js e bom")
+   * @param key  The key, so you can get it with <MongoClient>.get("key")
+   * @param value value The value which will be saved to the key
+   * @description saves data to mongodb
+   * @example <reconDB>.set("test","js is cool")
    */
   public set(key: string, value: any) {
     if (!key || !value) return;
@@ -63,9 +63,9 @@ export class jupterDB {
 
   /**
    * @method
-   * @param key Eles digitam que você deseja excluir
-   * @description Remove dados do MongoDB
-   * @example <jupterDB>.delete("teste")
+   * @param key They key you wish to delete
+   * @description Removes data from mongodb
+   * @example <reconDB>.delete("test")
    */
   public delete(key: string) {
     if (!key) return;
@@ -78,9 +78,9 @@ export class jupterDB {
 
   /**
    * @method
-   * @param key A chave que você deseja obter dados
-   * @description Obtém dados do banco de dados com uma chave
-   * @example <jupterDB>.get('key1')
+   * @param key The key you wish to get data
+   * @description Gets data from the database with a key
+   * @example <reconDB>.get('key1')
    */
   public get(key: string): any {
     if (!key) return;
@@ -89,15 +89,15 @@ export class jupterDB {
 
   /**
    * @method
-   * @param key A chave que você deseja enviar dados para
-   * @description Empurre os dados para uma matriz com uma tecla
+   * @param key The key you wish to push data to
+   * @description Push data to the an array with a key
    * @example
    */
   public push(key: string, ...pushValue: any) {
     const data = this.dbCollection.get(key);
     const values = pushValue.flat();
     if (!Array.isArray(data))
-      throw Error(`Você não pode puxar dados para um valor ${typeof data}!`);
+      throw Error(`You cant push data to a ${typeof data} value!`);
 
     data.push(pushValue);
     this.schema.findOne({ key }, async (err, res) => {
@@ -108,7 +108,7 @@ export class jupterDB {
 
   /**
    * @method
-   * @returns Dados em cache com a coleção de discórdia.js
+   * @returns Cached data with discord.js collection
    */
   public collection(): Collection<string, any> {
     return this.dbCollection;
