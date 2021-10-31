@@ -19,20 +19,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.reconDB = void 0;
+exports.jupterDB = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const discord_js_1 = require("discord.js");
-class reconDB {
-    schema = mongoose_1.default.model("recondb-collection", new mongoose_1.Schema({
+class jupterDB {
+    schema = mongoose_1.default.model("jupterdb-collection", new mongoose_1.Schema({
         key: String,
         value: mongoose_1.default.SchemaTypes.Mixed,
     }));
     dbCollection = new discord_js_1.Collection();
     client;
     /**
-     * @name reconDB
+     * @name jupterDB
      * @kind constructor
-     * @param {reconDBOptions} options options to use the database
+     * @param {jupterDBOptions} options options to use the database
      */
     constructor(mongooseConnectionString) {
         if (mongoose_1.default.connection.readyState !== 1) {
@@ -54,7 +54,7 @@ class reconDB {
      * @param key  The key, so you can get it with <MongoClient>.get("key")
      * @param value value The value which will be saved to the key
      * @description saves data to mongodb
-     * @example <reconDB>.set("test","js is cool")
+     * @example <jupterDB>.set("test","js is cool")
      */
     set(key, value) {
         if (!key || !value)
@@ -74,7 +74,7 @@ class reconDB {
      * @method
      * @param key They key you wish to delete
      * @description Removes data from mongodb
-     * @example <reconDB>.delete("test")
+     * @example <jupterDB>.delete("test")
      */
     delete(key) {
         if (!key)
@@ -91,7 +91,7 @@ class reconDB {
      * @method
      * @param key The key you wish to get data
      * @description Gets data from the database with a key
-     * @example <reconDB>.get('key1')
+     * @example <jupterDB>.get('key1')
      */
     get(key) {
         if (!key)
@@ -123,5 +123,5 @@ class reconDB {
         return this.dbCollection;
     }
 }
-exports.reconDB = reconDB;
-//# sourceMappingURL=reconDB.js.map
+exports.jupterDB = jupterDB;
+//# sourceMappingURL=jupterDB.js.map

@@ -1,4 +1,4 @@
-export { reconDB, reconDBSchema } from "./database/reconDB";
+export { jupterDB, jupterDBSchema } from "./database/jupterDB";
 export { GiveawayClientOptions, GiveawayClientSchema, StartOptions, GiveawayClient } from "./giveaways";
 export { generateTranscript, TranscriptOptions, Message } from "./transcripts";
 export { Button, ButtonNames, PaginationOptions, pagination } from "./pagination";
