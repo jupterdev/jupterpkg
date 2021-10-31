@@ -26,7 +26,7 @@ export class jupterDB {
     if (mongoose.connection.readyState !== 1) {
       if (!mongooseConnectionString)
         throw new Error(
-          "There is no established  connection with mongoose and a mongoose connection is required!"
+          "Não há conexão estabelecida com mangusto e uma conexão manguosa é necessária!"
         );
 
       mongoose.connect(mongooseConnectionString);
@@ -97,7 +97,7 @@ export class jupterDB {
     const data = this.dbCollection.get(key);
     const values = pushValue.flat();
     if (!Array.isArray(data))
-      throw Error(`You cant push data to a ${typeof data} value!`);
+      throw Error(`Você não pode empurrar dados para um ${typeof data} valor!`);
 
     data.push(pushValue);
     this.schema.findOne({ key }, async (err, res) => {
