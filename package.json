@@ -1,6 +1,6 @@
 {
-  "name": "jupterpkg",
-  "version": "1.2.5",
+  "name": "jupterDB",
+  "version": "1.0.0",
   "description": "jupterDB",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
